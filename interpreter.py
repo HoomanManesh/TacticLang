@@ -36,7 +36,7 @@ def translate_expr(expr, lineno):
                  .replace('pass',     '+')
                  .replace('feint',    '%'))
             # Allow letters, digits, whitespace, math symbols, commas
-            if not re.match(r'^[\w\s\+\-\*\/\%\(\)\.<>=!,]+$', t):
+            if not re.match(r'^[\w\s\+\-\*\/\%\(\)\.<>=!,\[\]]+$', t):
                 error(f"Invalid characters in expression: {expr}", lineno)
             out.append(t)
     return ''.join(out)
@@ -80,7 +80,7 @@ def transpile(lines):
             parts = re.split(r'\bpass\b', expr)
             args  = [translate_expr(p.strip(), lineno) for p in parts if p.strip()]
             py_lines.append(' ' * (4*indent) +
-                            f'print("🎙️ Commentator:", {", ".join(args)})')
+                            f'print("🎙️  Commentator:", {", ".join(args)})')
             i += 1
             continue
 
@@ -88,10 +88,10 @@ def transpile(lines):
         if stripped == 'startMatch();':
             # pick & announce formation
             py_lines.append('home_formation = random.choice(["4-3-3","4-4-2","5-3-2","3-5-2"])')
-            py_lines.append('print(f"🏟️ Home Coach selects {home_formation} formation for today!")')
+            py_lines.append('print(f"🏟️  Home Coach selects {home_formation} formation for today!")')
             # independently draw Away formation
             py_lines.append('away_formation = random.choice(["4-3-3","4-4-2","5-3-2","3-5-2"])')
-            py_lines.append('print(f"🏟️ Away Coach selects {away_formation} formation for today!")')
+            py_lines.append('print(f"🏟️  Away Coach selects {away_formation} formation for today!")')
            # fire off the MP3 in a separate app so it plays concurrently
             py_lines.append('import os')
             py_lines.append('os.startfile("cheerleaders-333433.mp3")')
@@ -105,6 +105,10 @@ def transpile(lines):
             var, expr = m.groups()
             py_expr = translate_expr(expr, lineno)
             py_lines.append(' ' * (4*indent) + f'{var} = {py_expr}')
+            # Once we've seen awayGoals, generate the unique, sorted minute lists:
+            if var == 'awayGoals':
+             py_lines.append('homeMinutes = sorted(random.sample(range(1,91), homeGoals))')
+             py_lines.append('awayMinutes = sorted(random.sample(range(1,91), awayGoals))')
             i += 1
             continue
 
