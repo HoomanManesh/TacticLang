@@ -1,0 +1,82 @@
+<program>          -> { <statement> }
+
+(* Any executable statement *)
+<statement>        -> <comment>
+                    | <startMatchStmt>
+                    | <playSoundStmt>         
+                    | <varDecl>
+                    | <printStmt>
+                    | <loopStmt>
+                    | <ifElseStmt>
+                    | <emptyLine>
+
+(* Comments: whole-line, skipped by parser/interpreter *)
+<comment>          -> ( "#" | "//" ) <anyChars> <newline>
+<emptyLine>        -> <newline>
+
+(* startMatch(): picks a random formation *)
+<startMatchStmt>   -> "startMatch" "(" ")" ";" <newline>
+
+(* playSound("file.wav"); plays an audio file *)
+<playSoundStmt>    -> "playSound" "(" <string> ")" ";" <newline>
+
+(* Variable declaration: let x = expr; *)
+<varDecl>          -> "let" <identifier> "=" <expression> ";" <newline>
+
+(* Printing: commentatorSay(expr); *)
+<printStmt>        -> "commentatorSay" "(" <expression> ")" ";" <newline>
+
+(* Loop: kickoff(init; cond; update) { … } *)
+<loopStmt>         -> "kickoff" "(" <init> ";" <condition> ";" <update> ")" "{" <newline>
+                         { <statement> }
+                       "}" <newline>
+
+<init>             -> <identifier> "=" <expression>
+<update>           -> <identifier> "++" 
+                    | <identifier> "--" 
+                    | <identifier> "=" <expression>
+
+(* Conditional chain *)
+<ifElseStmt>       -> <whenStmt> { <otherwiseIfStmt> } [ <otherwiseStmt> ]
+
+<whenStmt>         -> "when" "(" <condition> ")" "{" <newline>
+                         { <statement> }
+                       "}" <newline>
+
+<otherwiseIfStmt>  -> "otherwiseIf" "(" <condition> ")" "{" <newline>
+                         { <statement> }
+                       "}" <newline>
+
+<otherwiseStmt>    -> "otherwise" "{" <newline>
+                         { <statement> }
+                       "}" <newline>
+
+(* A boolean condition *)
+<condition>        -> <expression> <relOp> <expression>
+
+<relOp>            -> "==" | "!=" | "<" | "<=" | ">" | ">="
+
+(* Arithmetic / concatenation expressions *)
+<expression>       -> <term> { <soccerOp> <term> }
+
+<term>             -> <number>
+                    | <string>
+                    | <identifier>
+                    | "(" <expression> ")"
+
+<soccerOp>         -> "pass"       (* +, pass forward *)
+                    | "passBack"   (* -, pass backward *)
+                    | "cross"      (* *, cross forward *)
+                    | "crossBack"  (* /, cross back *)
+                    | "feint"      (* %, feint move *)
+
+(* Identifiers, numbers, and strings *)
+<identifier>       -> <letter> { <letter> | <digit> | "_" }
+<number>           -> <digit> { <digit> }
+<string>           -> '"' { any character except '"' } '"'
+
+(* Helpers *)
+<letter>           -> "A" … "Z" | "a" … "z"
+<digit>            -> "0" … "9"
+<anyChars>         -> ? any sequence of characters until end of line ?
+<newline>          -> "\n"
