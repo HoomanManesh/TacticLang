@@ -87,9 +87,11 @@ def transpile(lines):
         # Handle startMatch(); — pick formations & start stadium audio
         if stripped == 'startMatch();':
             # pick & announce formation
-            py_lines.append('formation = random.choice(["4-3-3","4-4-2","5-3-2","3-5-2"])')
-            py_lines.append('print(f"🏟️ Home Coach selects {formation} formation for today!")')
-            py_lines.append('print(f"🏟️ Away Coach selects {formation} formation for today!")')
+            py_lines.append('home_formation = random.choice(["4-3-3","4-4-2","5-3-2","3-5-2"])')
+            py_lines.append('print(f"🏟️ Home Coach selects {home_formation} formation for today!")')
+            # independently draw Away formation
+            py_lines.append('away_formation = random.choice(["4-3-3","4-4-2","5-3-2","3-5-2"])')
+            py_lines.append('print(f"🏟️ Away Coach selects {away_formation} formation for today!")')
            # fire off the MP3 in a separate app so it plays concurrently
             py_lines.append('import os')
             py_lines.append('os.startfile("cheerleaders-333433.mp3")')
