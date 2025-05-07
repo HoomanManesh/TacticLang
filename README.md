@@ -28,12 +28,12 @@ Error handling
 
 🛠 Getting Started
 
-Prerequisites
+-Prerequisites
 
-Python 3.8+  
+-Python 3.8+  
 - (Optional) A media player registered for `.mp3` if you use the audio feature  
 
-Installation
+-Installation
 
 1. Clone the repo  
    ```bash
@@ -49,8 +49,9 @@ Always show details
 Copy
 chmod +x interpreter.py
 
+---
 
-▶️ Usage
+-▶️ Usage
 Save your TacticLang source in a .tac file, for example HelloWorld.tac:
 
 tactica
@@ -91,7 +92,9 @@ cross	*
 crossBack	/
 feint	%
 
-📂 Examples
+---
+
+-📂 Examples
 HelloWorld.tac – prints a greeting
 
 Arithmetic.tac – demos +, -, *, /, %
@@ -108,7 +111,9 @@ PenaltyShootout.tac – simulates spot kicks
 
 StartingXI.tac – lists players 1–11 and picks a captain
 
-🤝 Contributing
+---
+
+-🤝 Contributing
 Fork the repo
 
 Create a feature branch (git checkout -b feature/my-feature)
@@ -119,9 +124,13 @@ Push to the branch (git push origin feature/my-feature)
 
 Open a Pull Request
 
-📜 License
+---
+
+-📜 License
 This project is released under the MIT License. See LICENSE for details.
 
-Designed and developed by Hooman Manesh 
+---
+
+-Designed and developed by Hooman Manesh 
 
 
