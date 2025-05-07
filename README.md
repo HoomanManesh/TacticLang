@@ -5,35 +5,35 @@ A soccer-inspired programming language where coding constructs map to football t
 
 
 
-#🚀 Features
+🚀 Features
 
-##Soccer-themed syntax 
+Soccer-themed syntax 
   - `pass` (`+`), `passBack` (`–`), `cross` (`*`), `crossBack` (`/`), `feint` (`%`)  
   - `kickoff(init; cond; update){…}` loops  
   - `when(cond){…}`, `otherwiseIf(cond){…}`, `otherwise{…}` conditionals  
   - `commentatorSay(expr);` prints play-by-play lines  
 
-##Built-in helpers  
+Built-in helpers  
   - `startMatch();` picks a random formation  
   - `randomStep()` → random minute 1–45  
 
-##Audio integration 
+Audio integration 
   - Launch your stadium ambience MP3 via `startMatch();`  
 
-##Error handling
+Error handling
   - Clear syntax errors with line numbers  
   - Catches runtime exceptions and reports them  
 
 ---
 
-#🛠 Getting Started
+🛠 Getting Started
 
-##Prerequisites
+Prerequisites
 
 Python 3.8+  
 - (Optional) A media player registered for `.mp3` if you use the audio feature  
 
-#Installation
+Installation
 
 1. Clone the repo  
    ```bash
@@ -50,7 +50,7 @@ Copy
 chmod +x interpreter.py
 
 
-#▶️ Usage
+▶️ Usage
 Save your TacticLang source in a .tac file, for example HelloWorld.tac:
 
 tactica
@@ -91,7 +91,7 @@ cross	*
 crossBack	/
 feint	%
 
-#📂 Examples
+📂 Examples
 HelloWorld.tac – prints a greeting
 
 Arithmetic.tac – demos +, -, *, /, %
@@ -108,7 +108,7 @@ PenaltyShootout.tac – simulates spot kicks
 
 StartingXI.tac – lists players 1–11 and picks a captain
 
-#🤝 Contributing
+🤝 Contributing
 Fork the repo
 
 Create a feature branch (git checkout -b feature/my-feature)
@@ -119,9 +119,9 @@ Push to the branch (git push origin feature/my-feature)
 
 Open a Pull Request
 
-#📜 License
+📜 License
 This project is released under the MIT License. See LICENSE for details.
 
-#Designed and developed by Hooman Manesh 
+Designed and developed by Hooman Manesh 
 
 
